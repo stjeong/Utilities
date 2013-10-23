@@ -1,0 +1,56 @@
+﻿<Window x:Class="UserAgentSelector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+        Title="UserAgent Selector v1.0" Height="220" Width="400" Loaded="Window_Loaded">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="x86">
+                <ListBox BorderThickness="0" ItemsSource="{Binding Version32List}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <RadioButton Tag="{Binding .}" Checked="IEModeRadio_Changed" IsChecked="{Binding Selected}" GroupName="IEMode32"></RadioButton>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </GroupBox>
+
+            <GroupBox Grid.Column="1" Header="x64" IsEnabled="{Binding Is64Bit}">
+                <ListBox BorderThickness="0" ItemsSource="{Binding Version64List}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <RadioButton Tag="{Binding .}" Checked="IEModeRadio_Changed" IsChecked="{Binding Selected}" GroupName="IEMode64"></RadioButton>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Margin="0 0 0 10">
+                <Hyperlink RequestNavigate="githubLink_Clicked" NavigateUri="https://github.com/stjeong/Utilities">Source codes: https://github.com/stjeong/Utilities</Hyperlink>
+            </TextBlock>
+            <CheckBox Grid.Row="1" IsChecked="{Binding RunWhenWindowsStarts}" Unchecked="RunStartup_Checked" Checked="RunStartup_Checked">Run when Windows starts</CheckBox>
+        </Grid>
+    </Grid>
+</Window>

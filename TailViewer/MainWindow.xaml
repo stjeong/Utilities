@@ -1,0 +1,44 @@
+﻿<Window x:Class="TailViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{Binding Path=Path}"></TextBlock>
+                <Button Grid.Column="1" Click="ApplyButton_Clicked">Apply</Button>
+            </Grid>
+
+            <ListBox Grid.Row="1" ItemsSource="{Binding FileList}" SelectionChanged="FileListBox_SelectionChanged">
+            </ListBox>
+
+        </Grid>
+
+        <ListBox x:Name="fileView" Grid.Column="1" VirtualizingPanel.IsVirtualizing="True"
+                 ItemsSource="{Binding Lines}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Path=Text}" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

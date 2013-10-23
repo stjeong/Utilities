@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TailViewer", "TailViewer\TailViewer.csproj", "{AE2095B1-24C4-4F5F-AB6D-65F885BFAE73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAgentSelector", "UserAgentSelector\UserAgentSelector.csproj", "{5461A894-45EE-45F5-9326-9E38F632E75C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE2095B1-24C4-4F5F-AB6D-65F885BFAE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2095B1-24C4-4F5F-AB6D-65F885BFAE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2095B1-24C4-4F5F-AB6D-65F885BFAE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2095B1-24C4-4F5F-AB6D-65F885BFAE73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5461A894-45EE-45F5-9326-9E38F632E75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5461A894-45EE-45F5-9326-9E38F632E75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5461A894-45EE-45F5-9326-9E38F632E75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5461A894-45EE-45F5-9326-9E38F632E75C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
