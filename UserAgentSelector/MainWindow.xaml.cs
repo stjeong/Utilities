@@ -20,6 +20,7 @@ namespace UserAgentSelector
     /// <summary>
     /// http://res.sysnet.pe.kr/bin/UserAgentSelector/publish.htm
     /// http://res.sysnet.pe.kr/bin/UserAgentSelector/UserAgentSelector.application
+    /// http://res.sysnet.pe.kr/bin/UserAgentSelector/UserAgentSelector.zip
     /// Interaction logic for MainWindow.xaml
     /// 
     /// Free icon from: https://www.iconfinder.com/icons/63469/domain_email_host_hosting_mysql_php_phpmyadmin_icon

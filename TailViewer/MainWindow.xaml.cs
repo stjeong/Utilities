@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using TailViewer.Properties;
 
@@ -77,10 +78,13 @@ namespace TailViewer
             if (name == "Path")
             {
                 ListFiles();
+
             }
 
             PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
+
+        FileTextWatcher _watcher;
 
         private void ListFiles(string path = "")
         {
@@ -125,18 +129,51 @@ namespace TailViewer
             string text = e.AddedItems[0] as string;
             string filePath = System.IO.Path.Combine(this.Path, text);
 
-            int number = 0;
-            foreach (var item in File.ReadAllLines(filePath))
+            WatcherStart(filePath);
+        }
+        private void WatcherStart(string filePath)
+        {
+            if (_watcher != null)
             {
-                this.Lines.Add(new TextLine { LineNumber = number++, Text = item });
+                _watcher.Dispose();
             }
 
-            if (this.Lines.Count == 0)
+            _watcher = new FileTextWatcher(filePath);
+            _watcher.LineAdded += _watcher_LineAdded;
+            _watcher.Start();
+        }
+
+        void _watcher_LineAdded(object sender, EventArgs e)
+        {
+            if (Dispatcher.CheckAccess() == false)
             {
+                this.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Normal,
+                    (ThreadStart)(
+                    () =>
+                    {
+                        _watcher_LineAdded(sender, e);
+                    }));
                 return;
             }
 
-            fileView.ScrollIntoView(fileView.Items[fileView.Items.Count - 1]);
+            TailViewer.FileTextWatcher.FileChangedArgs args = e as TailViewer.FileTextWatcher.FileChangedArgs;
+
+            if (args.ClearAll == true)
+            {
+                this.Lines.Clear();
+            }
+
+            foreach (var item in args.Lines)
+            {
+                this.Lines.Add(new TextLine { LineNumber = _watcher.Line ++, Text = item });
+            }
+
+            if (fileView.Items.Count != 0)
+            {
+                fileView.SelectedIndex = this.Lines.Count - 1;
+                fileView.ScrollIntoView(fileView.Items[fileView.Items.Count - 1]);
+            }
         }
     }
 }

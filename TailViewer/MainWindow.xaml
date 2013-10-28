@@ -30,13 +30,18 @@
 
         </Grid>
 
-        <ListBox x:Name="fileView" Grid.Column="1" VirtualizingPanel.IsVirtualizing="True"
+        <ListBox x:Name="fileView" Grid.Column="1" VirtualizingPanel.IsVirtualizing="False"
                  ItemsSource="{Binding Lines}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="{Binding Path=Text}" />
-                    </WrapPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=LineNumber}"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Text}" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
