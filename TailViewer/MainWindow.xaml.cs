@@ -64,6 +64,7 @@ namespace TailViewer
             InitializeComponent();
 
             this.Path = Settings.Default.Path;
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,15 +79,13 @@ namespace TailViewer
             if (name == "Path")
             {
                 ListFiles();
-
             }
 
             PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
 
         FileTextWatcher _watcher;
-
-        private void ListFiles(string path = "")
+        private void ListFiles(string path = "", string filePath = "")
         {
             if (string.IsNullOrEmpty(path) == true)
             {
@@ -104,6 +103,11 @@ namespace TailViewer
             {
                 string fileName = System.IO.Path.GetFileName(item);
                 _fileList.Add(fileName);
+            }
+
+            if (string.IsNullOrEmpty(filePath) == false)
+            {
+                lstFiles.SelectedItem = System.IO.Path.GetFileName(filePath);
             }
         }
 
@@ -129,6 +133,9 @@ namespace TailViewer
             string text = e.AddedItems[0] as string;
             string filePath = System.IO.Path.Combine(this.Path, text);
 
+            Settings.Default.FilePath = filePath;
+            Settings.Default.Save();
+
             WatcherStart(filePath);
         }
         private void WatcherStart(string filePath)
@@ -138,9 +145,36 @@ namespace TailViewer
                 _watcher.Dispose();
             }
 
+            if (File.Exists(filePath) == false)
+            {
+                Settings.Default.FilePath = null;
+                Settings.Default.Save();
+
+                ListFiles();
+                return;
+            }
+
             _watcher = new FileTextWatcher(filePath);
             _watcher.LineAdded += _watcher_LineAdded;
+            _watcher.FolderChanged += _watcher_FolderChanged;
             _watcher.Start();
+        }
+
+        void _watcher_FolderChanged(object sender, EventArgs e)
+        {
+            if (Dispatcher.CheckAccess() == false)
+            {
+                this.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Normal,
+                    (ThreadStart)(
+                    () =>
+                    {
+                        _watcher_FolderChanged(sender, e);
+                    }));
+                return;
+            }
+
+            ListFiles(string.Empty, Settings.Default.FilePath);
         }
 
         void _watcher_LineAdded(object sender, EventArgs e)
@@ -166,7 +200,7 @@ namespace TailViewer
 
             foreach (var item in args.Lines)
             {
-                this.Lines.Add(new TextLine { LineNumber = _watcher.Line ++, Text = item });
+                this.Lines.Add(new TextLine { LineNumber = _watcher.Line++, Text = item });
             }
 
             if (fileView.Items.Count != 0)

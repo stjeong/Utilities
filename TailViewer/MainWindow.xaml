@@ -25,7 +25,7 @@
                 <Button Grid.Column="1" Click="ApplyButton_Clicked">Apply</Button>
             </Grid>
 
-            <ListBox Grid.Row="1" ItemsSource="{Binding FileList}" SelectionChanged="FileListBox_SelectionChanged">
+            <ListBox x:Name="lstFiles" Grid.Row="1" ItemsSource="{Binding FileList}" SelectionChanged="FileListBox_SelectionChanged">
             </ListBox>
 
         </Grid>

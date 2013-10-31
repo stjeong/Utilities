@@ -13,7 +13,9 @@ namespace TailViewer
 {
     public class FileTextWatcher : IDisposable
     {
-        FileSystemWatcher _watcher;
+        FileSystemWatcher _watcherFile;
+        FileSystemWatcher _watcherFolder;
+
         int _position;
         
         int _line;
@@ -27,6 +29,7 @@ namespace TailViewer
         string _filePath;
 
         public event EventHandler LineAdded;
+        public event EventHandler FolderChanged;
 
         byte[] _newLineBuf;
 
@@ -56,12 +59,25 @@ namespace TailViewer
 
             _oldTime = File.GetLastWriteTime(_filePath);
 
-            _watcher = new FileSystemWatcher(folder, fileName);
+            _watcherFile = new FileSystemWatcher(folder, fileName);
          //   _watcher = new FileSystemWatcher(folder);
-            _watcher.IncludeSubdirectories = false;
-            _watcher.NotifyFilter = NotifyFilters.Size| NotifyFilters.LastAccess | NotifyFilters.LastWrite;
-            _watcher.EnableRaisingEvents = true;
-            _watcher.Changed += _watcher_Changed;
+            _watcherFile.IncludeSubdirectories = false;
+            _watcherFile.NotifyFilter = NotifyFilters.Size| NotifyFilters.LastAccess | NotifyFilters.LastWrite;
+            _watcherFile.Changed += _watcher_FileChanged;
+            _watcherFile.EnableRaisingEvents = true;
+
+            _watcherFolder = new FileSystemWatcher(folder);
+            _watcherFolder.IncludeSubdirectories = false;
+            //_watcherFolder.NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.CreationTime | NotifyFilters.Attributes;
+            _watcherFolder.Created += _watcher_FolderChanged;
+            _watcherFolder.Deleted += _watcher_FolderChanged;
+            _watcherFolder.Renamed += _watcher_FolderChanged;
+            _watcherFolder.EnableRaisingEvents = true;
+
+            if (Environment.OSVersion.Version.Major < 6)
+            {
+                return; // Vista or later.
+            }
 
             _cancelToken = new CancellationTokenSource();
 
@@ -70,11 +86,6 @@ namespace TailViewer
             _touchTask = new Task(
                 () =>
                 {
-                    if (Environment.OSVersion.Version.Major < 6)
-                    {
-                        return; // Vista or later.
-                    }
-
                     while (true)
                     {
                         if (ct.IsCancellationRequested == true)
@@ -87,7 +98,7 @@ namespace TailViewer
                         {
                             _oldTime = current;
 
-                            _watcher_Changed(_watcher, new FileSystemEventArgs(WatcherChangeTypes.Changed, folder, fileName));
+                            _watcher_FileChanged(_watcherFile, new FileSystemEventArgs(WatcherChangeTypes.Changed, folder, fileName));
                         }
                         
                         Thread.Sleep(500);
@@ -95,6 +106,11 @@ namespace TailViewer
                 }, _cancelToken.Token);
 
             _touchTask.Start();
+        }
+
+        void _watcher_FolderChanged(object sender, FileSystemEventArgs e)
+        {
+            OnFolderChanged();
         }
 
         private Encoding GetFileEncoding(string _filePath)
@@ -106,7 +122,7 @@ namespace TailViewer
             }
         }
 
-        private void _watcher_Changed(object sender, FileSystemEventArgs e)
+        private void _watcher_FileChanged(object sender, FileSystemEventArgs e)
         {
             ReadLines();
         }
@@ -170,7 +186,7 @@ namespace TailViewer
 
         public void Dispose()
         {
-            _watcher.Dispose();
+            _watcherFile.Dispose();
 
             try
             {
@@ -178,6 +194,16 @@ namespace TailViewer
                 _touchTask.Wait();
             }
             catch { }
+        }
+
+        protected virtual void OnFolderChanged()
+        {
+            if (FolderChanged == null)
+            {
+                return;
+            }
+
+            FolderChanged(this, EventArgs.Empty);
         }
 
         protected virtual void OnLinedAdded(List<string> lines, long position, bool clearAll)
