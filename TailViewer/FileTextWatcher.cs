@@ -17,7 +17,7 @@ namespace TailViewer
         FileSystemWatcher _watcherFolder;
 
         int _position;
-        
+
         int _line;
         public int Line
         {
@@ -46,6 +46,7 @@ namespace TailViewer
 
         Task _touchTask;
         CancellationTokenSource _cancelToken;
+        EventWaitHandle _ewhExit;
         DateTime _oldTime;
 
         public void Start()
@@ -60,15 +61,13 @@ namespace TailViewer
             _oldTime = File.GetLastWriteTime(_filePath);
 
             _watcherFile = new FileSystemWatcher(folder, fileName);
-         //   _watcher = new FileSystemWatcher(folder);
             _watcherFile.IncludeSubdirectories = false;
-            _watcherFile.NotifyFilter = NotifyFilters.Size| NotifyFilters.LastAccess | NotifyFilters.LastWrite;
+            _watcherFile.NotifyFilter = NotifyFilters.Size | NotifyFilters.LastAccess | NotifyFilters.LastWrite;
             _watcherFile.Changed += _watcher_FileChanged;
             _watcherFile.EnableRaisingEvents = true;
 
             _watcherFolder = new FileSystemWatcher(folder);
             _watcherFolder.IncludeSubdirectories = false;
-            //_watcherFolder.NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.CreationTime | NotifyFilters.Attributes;
             _watcherFolder.Created += _watcher_FolderChanged;
             _watcherFolder.Deleted += _watcher_FolderChanged;
             _watcherFolder.Renamed += _watcher_FolderChanged;
@@ -86,6 +85,8 @@ namespace TailViewer
             _touchTask = new Task(
                 () =>
                 {
+                    _ewhExit = new EventWaitHandle(false, EventResetMode.ManualReset);
+
                     while (true)
                     {
                         if (ct.IsCancellationRequested == true)
@@ -100,8 +101,8 @@ namespace TailViewer
 
                             _watcher_FileChanged(_watcherFile, new FileSystemEventArgs(WatcherChangeTypes.Changed, folder, fileName));
                         }
-                        
-                        Thread.Sleep(500);
+
+                        _ewhExit.WaitOne(500);
                     }
                 }, _cancelToken.Token);
 
@@ -186,11 +187,32 @@ namespace TailViewer
 
         public void Dispose()
         {
-            _watcherFile.Dispose();
-
             try
             {
                 _cancelToken.Cancel();
+            }
+            catch { }
+
+            try
+            {
+                _ewhExit.Set();
+            }
+            catch { }
+
+            try
+            {
+                _watcherFile.Dispose();
+            }
+            catch { }
+
+            try
+            {
+                _watcherFolder.Dispose();
+            }
+            catch { }
+
+            try
+            {
                 _touchTask.Wait();
             }
             catch { }
