@@ -162,19 +162,22 @@ namespace TailViewer
 
         void _watcher_FolderChanged(object sender, EventArgs e)
         {
-            if (Dispatcher.CheckAccess() == false)
+            lock (lstFiles)
             {
-                this.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Normal,
-                    (ThreadStart)(
-                    () =>
-                    {
-                        _watcher_FolderChanged(sender, e);
-                    }));
-                return;
-            }
+                if (Dispatcher.CheckAccess() == false)
+                {
+                    this.Dispatcher.BeginInvoke(
+                        DispatcherPriority.Normal,
+                        (ThreadStart)(
+                        () =>
+                        {
+                            _watcher_FolderChanged(sender, e);
+                        }));
+                    return;
+                }
 
-            ListFiles(string.Empty, Settings.Default.FilePath);
+                ListFiles(string.Empty, Settings.Default.FilePath);
+            }
         }
 
         void _watcher_LineAdded(object sender, EventArgs e)
@@ -207,6 +210,39 @@ namespace TailViewer
             {
                 fileView.SelectedIndex = this.Lines.Count - 1;
                 fileView.ScrollIntoView(fileView.Items[fileView.Items.Count - 1]);
+            }
+        }
+
+        private void DeleteFile_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if (MessageBox.Show("Delete it?", "File Delete", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.None) == MessageBoxResult.Yes)
+                {
+                    lock (lstFiles)
+                    {
+                        List<string> deleted = new List<string>();
+
+                        foreach (var item in lstFiles.SelectedItems)
+                        {
+                            string filePath = System.IO.Path.Combine(this.Path, item as string);
+
+                            try
+                            {
+                                System.IO.File.Delete(filePath);
+                                deleted.Add(item as string);
+                            }
+                            catch
+                            {
+                            }
+                        }
+
+                        foreach (var item in deleted)
+                        {
+                            _fileList.Remove(item);
+                        }
+                    }
+                }
             }
         }
     }
