@@ -36,3 +36,5 @@ AdmobLib/
 *.publishsettings
 tech/
 publish/
+ipch/
+packages/
