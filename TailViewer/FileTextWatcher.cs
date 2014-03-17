@@ -18,6 +18,8 @@ namespace TailViewer
 
         int _position;
 
+        string _filter;
+
         int _line;
         public int Line
         {
@@ -33,10 +35,11 @@ namespace TailViewer
 
         byte[] _newLineBuf;
 
-        public FileTextWatcher(string pathToMonitor)
+        public FileTextWatcher(string pathToMonitor, string filter)
         {
             _filePath = pathToMonitor;
 
+            _filter = filter;
             _position = 0;
             _line = 0;
             _encoding = GetFileEncoding(_filePath);
@@ -114,11 +117,32 @@ namespace TailViewer
             OnFolderChanged();
         }
 
-        private Encoding GetFileEncoding(string _filePath)
+        private Encoding GetFileEncoding(string filePath)
         {
-            using (FileStream fs = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader sr = new StreamReader(fs, true))
             {
+                if (sr.CurrentEncoding.CodePage == 65001) // In case: Unicode without BOM
+                {
+                    char[] contents = new char[1024];
+                    sr.Read(contents, 0, 1024);
+
+                    bool unicodeEncoding = true;
+                    for (int i = 1; i < contents.Length; i += 2)
+                    {
+                        if (contents[i] != '\0')
+                        {
+                            unicodeEncoding = false;
+                            break;
+                        }
+                    }
+
+                    if (unicodeEncoding == true)
+                    {
+                        return Encoding.Unicode;
+                    }
+                }
+
                 return sr.CurrentEncoding;
             }
         }
@@ -152,6 +176,8 @@ namespace TailViewer
                 List<byte> byteBuf = new List<byte>((int)fileLength);
 
                 int lastNewLinePosition = _position;
+                List<string> lines = new List<string>();
+
                 for (int i = _position; i < fileLength; i++)
                 {
                     byteBuf.Add(br.ReadByte());
@@ -160,27 +186,47 @@ namespace TailViewer
                     {
                         lastNewLinePosition = i + 1;
                     }
-                    else if (_newLineBuf.Length == 2 && byteBuf[byteBuf.Count - 2] == _newLineBuf[0]
+                    else if (_newLineBuf.Length == 2 && byteBuf.Count >= 2 && byteBuf[byteBuf.Count - 2] == _newLineBuf[0]
                         && byteBuf[byteBuf.Count - 1] == _newLineBuf[1])
                     {
                         lastNewLinePosition = i + 1;
                     }
-                }
 
-                List<string> lines = new List<string>();
-                using (MemoryStream ms = new MemoryStream(byteBuf.ToArray(), 0, lastNewLinePosition - _position))
-                {
-                    using (StreamReader sr = new StreamReader(ms))
+                    if (_position != lastNewLinePosition)
                     {
-                        while (sr.EndOfStream == false)
+                        byte[] arrLine = byteBuf.ToArray();
+
+                        using (MemoryStream ms = new MemoryStream(arrLine, 0, arrLine.Length))
                         {
-                            string txt = sr.ReadLine();
-                            lines.Add(txt);
+                            using (StreamReader sr = new StreamReader(ms, _encoding))
+                            {
+                                while (sr.EndOfStream == false)
+                                {
+                                    string txt = sr.ReadLine();
+                                    bool add = true;
+
+                                    if (string.IsNullOrEmpty(this._filter) == false)
+                                    {
+                                        if (txt.IndexOf(this._filter, StringComparison.OrdinalIgnoreCase) == -1)
+                                        {
+                                            add = false;
+                                        }
+                                    }
+
+                                    if (add == true)
+                                    {
+                                        lines.Add(txt);
+                                    }
+                                }
+                            }
                         }
+
+                        byteBuf.Clear();
+                        _position = lastNewLinePosition;
                     }
                 }
 
-                _position = lastNewLinePosition;
+
                 OnLinedAdded(lines, lastNewLinePosition, clearAll);
             }
         }

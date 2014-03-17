@@ -47,6 +47,26 @@ namespace TailViewer
             }
         }
 
+        string _filter;
+        public string Filter
+        {
+            get { return _filter; }
+            set
+            {
+                if (_filter == value)
+                {
+                    return;
+                }
+
+                _filter = value;
+
+                Settings.Default.Filter = this.Filter;
+                Settings.Default.Save();
+
+                OnPropertyChanged("Filter");
+            }
+        }
+
         ObservableCollection<string> _fileList = new ObservableCollection<string>();
         public ObservableCollection<string> FileList
         {
@@ -64,6 +84,7 @@ namespace TailViewer
             InitializeComponent();
 
             this.Path = Settings.Default.Path;
+            this.Filter = Settings.Default.Filter;
 
         }
 
@@ -136,9 +157,9 @@ namespace TailViewer
             Settings.Default.FilePath = filePath;
             Settings.Default.Save();
 
-            WatcherStart(filePath);
+            WatcherStart(filePath, this.Filter);
         }
-        private void WatcherStart(string filePath)
+        private void WatcherStart(string filePath, string filter)
         {
             if (_watcher != null)
             {
@@ -154,7 +175,7 @@ namespace TailViewer
                 return;
             }
 
-            _watcher = new FileTextWatcher(filePath);
+            _watcher = new FileTextWatcher(filePath, filter);
             _watcher.LineAdded += _watcher_LineAdded;
             _watcher.FolderChanged += _watcher_FolderChanged;
             _watcher.Start();

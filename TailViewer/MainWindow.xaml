@@ -13,6 +13,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid>
@@ -28,6 +29,8 @@
             <ListBox x:Name="lstFiles" Grid.Row="1" ItemsSource="{Binding FileList}" 
                 SelectionChanged="FileListBox_SelectionChanged" KeyUp="DeleteFile_KeyUp">
             </ListBox>
+
+            <TextBox Grid.Row="2" Text="{Binding Path=Filter}" />
 
         </Grid>
 
