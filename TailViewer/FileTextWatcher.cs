@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace TailViewer
     {
         FileSystemWatcher _watcherFile;
         FileSystemWatcher _watcherFolder;
+        bool _exitThread;
 
         int _position;
 
@@ -106,6 +108,10 @@ namespace TailViewer
                         }
 
                         _ewhExit.WaitOne(500);
+                        if (_exitThread == true)
+                        {
+                            break;
+                        }
                     }
                 }, _cancelToken.Token);
 
@@ -241,6 +247,7 @@ namespace TailViewer
 
             try
             {
+                _exitThread = true;
                 _ewhExit.Set();
             }
             catch { }
@@ -248,12 +255,6 @@ namespace TailViewer
             try
             {
                 _watcherFile.Dispose();
-            }
-            catch { }
-
-            try
-            {
-                _watcherFolder.Dispose();
             }
             catch { }
 

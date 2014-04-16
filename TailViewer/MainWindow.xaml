@@ -14,6 +14,7 @@
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid>
@@ -32,10 +33,16 @@
 
             <TextBox Grid.Row="2" Text="{Binding Path=Filter}" />
 
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <Button Click="DeleteFilesClicked">Delete Files</Button>
+                <Button Click="RefreshForceClicked">Refresh</Button>
+            </StackPanel>
+
         </Grid>
 
-        <ListBox x:Name="fileView" Grid.Column="1" VirtualizingPanel.IsVirtualizing="False"
-                 ItemsSource="{Binding Lines}">
+        <!-- VirtualizingPanel.IsVirtualizing="False" -->
+        <ListBox x:Name="fileView" Grid.Column="1" 
+                 ItemsSource="{Binding Lines}" SelectionMode="Multiple" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

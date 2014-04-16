@@ -106,6 +106,8 @@ namespace TailViewer
         }
 
         FileTextWatcher _watcher;
+        DateTime _lastTriggered = DateTime.Now;
+
         private void ListFiles(string path = "", string filePath = "")
         {
             if (string.IsNullOrEmpty(path) == true)
@@ -118,17 +120,27 @@ namespace TailViewer
                 return;
             }
 
+            string fileName = System.IO.Path.GetFileName(filePath);
             _fileList.Clear();
+
+            DateTime now = DateTime.Now;
+
+            if ((now - _lastTriggered).TotalSeconds < 3)
+            {
+                return;
+            }
+
+            _lastTriggered = now;
 
             foreach (var item in Directory.GetFiles(path))
             {
-                string fileName = System.IO.Path.GetFileName(item);
-                _fileList.Add(fileName);
+                string itemName = System.IO.Path.GetFileName(item);
+                _fileList.Add(itemName);
             }
 
             if (string.IsNullOrEmpty(filePath) == false)
             {
-                lstFiles.SelectedItem = System.IO.Path.GetFileName(filePath);
+                lstFiles.SelectedItem = fileName;
             }
         }
 
@@ -265,6 +277,27 @@ namespace TailViewer
                     }
                 }
             }
+        }
+
+        private void DeleteFilesClicked(object sender, RoutedEventArgs e)
+        {
+            System.IO.DirectoryInfo dir = new DirectoryInfo(this.Path);
+            foreach (FileInfo item in dir.EnumerateFiles())
+            {
+                try
+                { 
+                    System.IO.File.Delete(item.FullName);
+                }
+                catch (System.IO.IOException) { }
+                catch (System.UnauthorizedAccessException) { }
+            }
+
+            ListFiles(string.Empty, Settings.Default.FilePath);
+        }
+
+        private void RefreshForceClicked(object sender, RoutedEventArgs e)
+        {
+            ListFiles(string.Empty, Settings.Default.FilePath);
         }
     }
 }
