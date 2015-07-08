@@ -22,7 +22,6 @@ namespace UserAgentSelector
     /// http://res.sysnet.pe.kr/bin/UserAgentSelector/UserAgentSelector.application
     /// http://res.sysnet.pe.kr/bin/UserAgentSelector/UserAgentSelector.zip
     /// Interaction logic for MainWindow.xaml
-    /// 
     /// Free icon from: https://www.iconfinder.com/icons/63469/domain_email_host_hosting_mysql_php_phpmyadmin_icon
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
