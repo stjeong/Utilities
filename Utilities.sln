@@ -1,13 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TailViewer", "TailViewer\TailViewer.csproj", "{AE2095B1-24C4-4F5F-AB6D-65F885BFAE73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAgentSelector", "UserAgentSelector\UserAgentSelector.csproj", "{5461A894-45EE-45F5-9326-9E38F632E75C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "go", "go\go.csproj", "{A72D9B6D-6E00-4295-91CE-BA163B967349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "excludedportrange", "excludedportrange\excludedportrange.csproj", "{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{8BBB6567-D34B-4E98-9C98-FB59BD81B000}"
+	ProjectSection(SolutionItems) = preProject
+		Binaries\excludedportrange.zip = Binaries\excludedportrange.zip
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,8 +56,23 @@ Global
 		{A72D9B6D-6E00-4295-91CE-BA163B967349}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A72D9B6D-6E00-4295-91CE-BA163B967349}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A72D9B6D-6E00-4295-91CE-BA163B967349}.Release|Win32.ActiveCfg = Release|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Debug|Win32.Build.0 = Debug|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Release|Win32.ActiveCfg = Release|Any CPU
+		{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03B07C16-EE00-4381-A62C-9D6615763D8E}
 	EndGlobalSection
 EndGlobal
