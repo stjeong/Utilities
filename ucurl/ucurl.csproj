@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B1903B1-E3FD-4003-9D21-A4E24EBF9A79}</ProjectGuid>
+    <ProjectGuid>{04A7C79F-DC26-4E05-AB44-2B9447F3FEA1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>excludedportrange</RootNamespace>
-    <AssemblyName>excludedportrange</AssemblyName>
+    <RootNamespace>ucurl</RootNamespace>
+    <AssemblyName>ucurl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,9 +44,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.manifest" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
@@ -60,7 +54,6 @@ PowerShell -NoProfile -ExecutionPolicy unrestricted -file $(SolutionDir)makezip.
 
 robocopy $(TargetDir) $(SolutionDir)Binaries *.zip
 
-exit 0
-</PostBuildEvent>
+exit 0</PostBuildEvent>
   </PropertyGroup>
 </Project>
