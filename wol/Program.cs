@@ -55,7 +55,7 @@ namespace wol
             string appName = Path.GetFileNameWithoutExtension(typeof(Program).Assembly.Location);
             Console.WriteLine($"{appName} [mac_address]");
             Console.WriteLine($"ex:");
-            Console.WriteLine($"\te{appName} 01-00-00-00-00-02");
+            Console.WriteLine($"\t{appName} 01-00-00-00-00-02");
         }
 
         private static IPAddress[] GetDirectedBroadcastAddresses()

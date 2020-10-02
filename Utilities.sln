@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "excludedportrange", "exclud
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{8BBB6567-D34B-4E98-9C98-FB59BD81B000}"
 	ProjectSection(SolutionItems) = preProject
+		Binaries\delunused.zip = Binaries\delunused.zip
 		Binaries\excludedportrange.zip = Binaries\excludedportrange.zip
 		Binaries\netcat.zip = Binaries\netcat.zip
 		Binaries\ucurl.zip = Binaries\ucurl.zip
@@ -29,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netcat", "netcat\netcat.csproj", "{224BF940-55DD-4FB5-B606-7E4926B36EBE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wol", "wol\wol.csproj", "{B31EF08E-5A9E-4824-AF04-59067EB53DCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "delunused", "delunused\delunused.csproj", "{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +121,18 @@ Global
 		{B31EF08E-5A9E-4824-AF04-59067EB53DCD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B31EF08E-5A9E-4824-AF04-59067EB53DCD}.Release|Win32.ActiveCfg = Release|Any CPU
 		{B31EF08E-5A9E-4824-AF04-59067EB53DCD}.Release|Win32.Build.0 = Release|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Debug|Win32.Build.0 = Debug|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Win32.ActiveCfg = Release|Any CPU
+		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
