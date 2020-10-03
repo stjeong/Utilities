@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}</ProjectGuid>
+    <ProjectGuid>{5F084BA0-F68F-4413-A3AD-78D8112FDED0}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>delunused</RootNamespace>
-    <AssemblyName>delunused</AssemblyName>
+    <RootNamespace>ipscan</RootNamespace>
+    <AssemblyName>ipscan</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -45,8 +45,4 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>

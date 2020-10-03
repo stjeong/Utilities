@@ -20,16 +20,18 @@ namespace delunused
         }
         private static void EnumerateDirectories(string rootPath)
         {
-            string[] directories = null;
+            string[] directories;
 
             try
             {
                 directories = Directory.GetDirectories(rootPath);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch
             {
                 return;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             foreach (string dirPath in directories)
             {

@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wol", "wol\wol.csproj", "{B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "delunused", "delunused\delunused.csproj", "{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ipscan", "ipscan\ipscan.csproj", "{5F084BA0-F68F-4413-A3AD-78D8112FDED0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,18 @@ Global
 		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Win32.ActiveCfg = Release|Any CPU
 		{0D4E69C0-9A70-4033-85F2-6032F8E1FFE2}.Release|Win32.Build.0 = Release|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Debug|Win32.Build.0 = Debug|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Release|Win32.ActiveCfg = Release|Any CPU
+		{5F084BA0-F68F-4413-A3AD-78D8112FDED0}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,8 +31,7 @@ namespace wol
                 return;
             }
 
-            UdpClient udp = new UdpClient();
-            udp.EnableBroadcast = true;
+            UdpClient udp = new UdpClient() { EnableBroadcast = true };
 
             foreach (IPAddress ipAddress in GetDirectedBroadcastAddresses())
             {
@@ -44,7 +43,7 @@ namespace wol
             Send(udp, "255.255.255.255", 9, wolBuffer);
         }
 
-        static void Send(UdpClient udp, string address, int port, byte [] buffer)
+        static void Send(UdpClient udp, string address, int port, byte[] buffer)
         {
             udp.Send(buffer, buffer.Length, address, port);
             Console.WriteLine($"Sent - {address}:{port}");
