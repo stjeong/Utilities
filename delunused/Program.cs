@@ -71,6 +71,7 @@ namespace delunused
             Console.WriteLine($"\tPACKAGES // if .sln in parent folder");
             Console.WriteLine($"\t\t // if NUGET.CONFIG file in parent folder");
             Console.WriteLine($"\t\t // if has 'Newtonsoft.Json' sub directory");
+            Console.WriteLine($"\tV16   // if '.suo' file exists");
             Console.WriteLine($"ex:");
             Console.WriteLine($"\t{appName} d:\\");
         }
@@ -86,6 +87,13 @@ namespace delunused
                 case "_UPGRADEREPORT_FILES":
                 case "_VTI_CNF":
                     return true;
+
+                case "V16":
+                    if (HasFile(dirPath, ".SUO") == true)
+                    {
+                        return true;
+                    }
+                    break;
 
                 case "OBJ":
                 case "BIN":
@@ -155,6 +163,12 @@ namespace delunused
             }
 
             return false;
+        }
+
+        private static bool HasFile(string dirPath, string fileName)
+        {
+            string filePath = Path.Combine(dirPath, fileName);
+            return File.Exists(filePath);
         }
 
         private static bool HasNoFiles(string dirPath)
