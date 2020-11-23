@@ -17,6 +17,7 @@ goto EXIT
 :_JUMP
 IF NOT '%2' == '' goto EXIT
 for /f %%i in ('go2.exe %1') do set MOVE_PATH=%%i
+pushd .
 cd /D %MOVE_PATH%
 goto EXIT
 

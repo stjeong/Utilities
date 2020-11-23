@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -61,8 +62,31 @@ namespace go
 
                     return;
                 }
+
                 if (goInstance.ContainsKey(key) == false)
                 {
+                    string candidate = "";
+
+                    foreach (string dirPath in Directory.EnumerateDirectories(Environment.CurrentDirectory, "*.*", SearchOption.AllDirectories))
+                    {
+                        string dirName = Path.GetFileName(dirPath);
+                        if (dirName.Equals(key, StringComparison.OrdinalIgnoreCase) == true)
+                        {
+                            Console.WriteLine("\"" + dirPath + "\"");
+                            return;
+                        }
+                        else if (dirName.IndexOf(key, 0, StringComparison.OrdinalIgnoreCase) != -1)
+                        {
+                            candidate = dirPath;
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(candidate) == false)
+                    {
+                        Console.WriteLine("\"" + candidate + "\"");
+                        return;
+                    }
+
                     ShowOptions();
                     return;
                 }
