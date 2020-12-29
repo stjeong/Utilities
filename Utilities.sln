@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{8B
 		Binaries\delunused.zip = Binaries\delunused.zip
 		Binaries\excludedportrange.zip = Binaries\excludedportrange.zip
 		Binaries\netcat.zip = Binaries\netcat.zip
+		Binaries\pptfont.zip = Binaries\pptfont.zip
 		Binaries\ucurl.zip = Binaries\ucurl.zip
 		Binaries\wol.zip = Binaries\wol.zip
 	EndProjectSection
@@ -36,6 +37,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ipscan", "ipscan\ipscan.csproj", "{5F084BA0-F68F-4413-A3AD-78D8112FDED0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hexcode", "hexcode\hexcode.csproj", "{4ACE0BD1-09C5-4783-A4BD-A9B8C77749E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pptfont", "pptfont\pptfont.csproj", "{76A0FF32-A33F-46B3-9297-906C6A0741E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +164,18 @@ Global
 		{4ACE0BD1-09C5-4783-A4BD-A9B8C77749E2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4ACE0BD1-09C5-4783-A4BD-A9B8C77749E2}.Release|Win32.ActiveCfg = Release|Any CPU
 		{4ACE0BD1-09C5-4783-A4BD-A9B8C77749E2}.Release|Win32.Build.0 = Release|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Debug|Win32.Build.0 = Debug|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Win32.ActiveCfg = Release|Any CPU
+		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
