@@ -55,7 +55,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(azureDevopsBuild)' == '' ">
     <PostBuildEvent>
 SET PSTargetName=$(TargetName)
 SET PSTargetDir=$(TargetDir)
