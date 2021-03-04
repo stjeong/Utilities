@@ -76,11 +76,11 @@ jobs:
       - name: Zip Artifacts
         run: |
           powershell Compress-7Zip ".\delunused\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip
-          powershell Compress-7Zip ".\excludedportrange\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip
-          powershell Compress-7Zip ".\netcat\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip
-          powershell Compress-7Zip ".\pptfont\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip
-          powershell Compress-7Zip ".\ucurl\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip
-          powershell Compress-7Zip ".\wol\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip
+          powershell Compress-7Zip ".\excludedportrange\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
+          powershell Compress-7Zip ".\netcat\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
+          powershell Compress-7Zip ".\pptfont\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
+          powershell Compress-7Zip ".\ucurl\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
+          powershell Compress-7Zip ".\wol\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
 
       - name: Upload Release Asset
         id: upload-release-asset
