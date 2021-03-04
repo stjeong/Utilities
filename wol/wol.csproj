@@ -67,7 +67,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup Condition=" '$(azureDevopsBuild)' == '' ">
+  <PropertyGroup Condition=" '$(azureDevopsBuild)$(GITHUB_RUN_ID)' == ''  ">
     <PostBuildEvent>
 SET PSTargetName=$(TargetName)
 SET PSTargetDir=$(TargetDir)
