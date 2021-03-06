@@ -27,6 +27,18 @@ namespace hexcode
 
                 return;
             }
+            else if (encodingType == "guid")
+            {
+                Guid guid = new Guid(args[1]);
+
+                Console.WriteLine(guid.ToString("N"));
+                Console.WriteLine(guid.ToString("D"));
+                Console.WriteLine(guid.ToString("B"));
+                Console.WriteLine(guid.ToString("P"));
+                Console.WriteLine(guid.ToString("X"));
+
+                return;
+            }
 
             if (args.Length < 2)
             {
@@ -65,6 +77,8 @@ namespace hexcode
             Console.WriteLine($"\t{appName} utf-8 \"0x74-0x65-0x73-0x74\"");
             Console.WriteLine($"\t{appName} utf-8 \"74,65,73,74\"");
             Console.WriteLine($"\t{appName} utf-8 \"0x74,0x65,0x73,0x74\"");
+            Console.WriteLine();
+            Console.WriteLine($"\t{appName} guid F30A070D-BFFB-46A7-B1D8-8781EF7B698A");
         }
 
         private static void Decode(Encoding encoding, string[] textBytes)

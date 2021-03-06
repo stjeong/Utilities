@@ -67,4 +67,7 @@ robocopy $(TargetDir) $(SolutionDir)Binaries *.zip
 exit 0
 </PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent />
+  </PropertyGroup>
 </Project>
