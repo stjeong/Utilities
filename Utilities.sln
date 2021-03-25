@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hexcode", "hexcode\hexcode.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pptfont", "pptfont\pptfont.csproj", "{76A0FF32-A33F-46B3-9297-906C6A0741E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "base64", "base64\base64.csproj", "{A0226569-16A3-42A4-95A5-70FF67375DF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -172,6 +174,18 @@ Global
 		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Win32.ActiveCfg = Release|Any CPU
 		{76A0FF32-A33F-46B3-9297-906C6A0741E4}.Release|Win32.Build.0 = Release|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Debug|Win32.Build.0 = Debug|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Release|Win32.ActiveCfg = Release|Any CPU
+		{A0226569-16A3-42A4-95A5-70FF67375DF1}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
