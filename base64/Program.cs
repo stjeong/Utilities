@@ -16,8 +16,23 @@ namespace base64
 
             if (args.Length == 1)
             {
-                byte[] orgBuffer = File.ReadAllBytes(args[0]);
-                Console.WriteLine(Convert.ToBase64String(orgBuffer, Base64FormattingOptions.InsertLineBreaks));
+                if (args[0] == "-d")
+                {
+                    if (BclExtension.ConsoleHelper.IsInputHandleRedirected() == true)
+                    {
+                        using (StreamReader br = new StreamReader(Console.OpenStandardInput()))
+                        {
+                            string text = br.ReadToEnd();
+                            byte [] buffer = Convert.FromBase64String(text);
+                            Console.WriteLine(Encoding.ASCII.GetString(buffer));
+                        }
+                    }
+                }
+                else
+                {
+                    byte[] orgBuffer = File.ReadAllBytes(args[0]);
+                    Console.WriteLine(Convert.ToBase64String(orgBuffer, Base64FormattingOptions.InsertLineBreaks));
+                }
             }
             else if (args.Length >= 2)
             {
@@ -38,7 +53,7 @@ namespace base64
                     {
                         case "-d":
                         case "--decode":
-                            string encodedText = File.ReadAllText(args[1]);
+                            string encodedText = File.Exists(args[1]) ? File.ReadAllText(args[1]) : args[1];
                             byte[] buffer = Convert.FromBase64String(encodedText);
                             Console.WriteLine(Encoding.ASCII.GetString(buffer));
                             return;

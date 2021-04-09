@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BclExtension;
+using System;
 using System.IO;
 using System.Net.Sockets;
 
@@ -14,7 +15,7 @@ namespace netcat
                 return;
             }
 
-            if (Console.IsInputRedirected == false)
+            if (BclExtension.ConsoleHelper.IsInputHandleRedirected() == false)
             {
                 Console.WriteLine("No input redirected");
                 Help();
