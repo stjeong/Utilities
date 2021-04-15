@@ -12,6 +12,9 @@ utilities
 * pptfont [https://www.sysnet.pe.kr/2/0/12464](https://www.sysnet.pe.kr/2/0/12464)
 * ucurl [https://www.sysnet.pe.kr/2/0/12307](https://www.sysnet.pe.kr/2/0/12307)
 * wol [https://www.sysnet.pe.kr/2/0/12336](https://www.sysnet.pe.kr/2/0/12336)
+* base64
+* hexcode
+* ukubectl [https://www.sysnet.pe.kr/2/0/12600](https://www.sysnet.pe.kr/2/0/12600)
 
 License
 ================================

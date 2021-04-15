@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "k8s": {
+      "commandName": "Project",
+      "commandLineArgs": "--install-dashboard"
+    }
+  }
+}
