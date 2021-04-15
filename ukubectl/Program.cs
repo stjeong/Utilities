@@ -1,6 +1,9 @@
 ﻿using k8s;
 using k8s.KubeConfigModels;
+using k8s.Models;
 using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +40,21 @@ namespace ukubectl
                     }
                     break;
 
+                case "--install-dashboard":
+                    {
+                        string dashboardUrl = await GetK8sDashboard();
+                        string arg = $"apply -f {dashboardUrl}";
+                        K8sUtil.RunKubectl(arg);
+
+                        /*
+                        string text = new WebClient().DownloadString(dashboardUrl);
+                        List<object> resList = Yaml.LoadAllFromString(text);
+
+                         K8sUtil.Apply(client, resList);
+                        */
+                    }
+                    break;
+
                 case "--register-cert":
                     {
                         InstallCaCertData(path);
@@ -70,6 +88,12 @@ namespace ukubectl
             }
         }
 
+        private static async Task<string> GetK8sDashboard()
+        {
+            string tagName = await GithubHelper.GetLastestTagName("kubernetes", "dashboard");
+            return $"https://raw.githubusercontent.com/kubernetes/dashboard/{tagName}/aio/deploy/recommended.yaml";
+        }
+
         private static void InstallCaCertData(string kubeconfigPath)
         {
             K8SConfiguration k8sConfig = KubernetesClientConfiguration.LoadKubeConfig(kubeconfigPath);
@@ -88,6 +112,7 @@ ukubectl controls the Kubernetes cluster manager.
 Basic Commands:
   --set-default-token           Set access token to kubeconfig from secrets.
   --register-cert [password]    Register certificates for CA and User in kubeconfig.
+  --install-dashboard           Install k8s dashboard.
 ");
         }
     }
