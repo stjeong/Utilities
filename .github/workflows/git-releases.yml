@@ -84,6 +84,7 @@ jobs:
           powershell Compress-7Zip ".\base64\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
           powershell Compress-7Zip ".\hexcode\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
           powershell Compress-7Zip ".\ukubectl\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
+          powershell Compress-7Zip ".\rotatefile\bin\${{env.BUILD_CONFIGURATION}}" -ArchiveFileName "Utilities.zip" -Format Zip -Append
 
       - name: Upload Release Asset
         id: upload-release-asset
