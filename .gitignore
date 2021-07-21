@@ -40,3 +40,4 @@ publish/
 ipch/
 packages/
 /.vs/Utilities/v16
+.dtbcache.v2
