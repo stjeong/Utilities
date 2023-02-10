@@ -18,7 +18,7 @@ namespace base64
             {
                 if (args[0] == "-d")
                 {
-                    if (BclExtension.ConsoleHelper.IsInputHandleRedirected() == true)
+                    if (Console.IsInputRedirected == true)
                     {
                         using (StreamReader br = new StreamReader(Console.OpenStandardInput()))
                         {

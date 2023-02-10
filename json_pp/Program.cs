@@ -8,7 +8,7 @@ namespace json_pp
     {
         static void Main(string[] args)
         {
-            if (BclExtension.ConsoleHelper.IsInputHandleRedirected() == false)
+            if (Console.IsInputRedirected == false)
             {
                 Console.WriteLine("No input redirected");
                 Help();
