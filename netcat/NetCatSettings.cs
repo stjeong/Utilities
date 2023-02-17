@@ -9,6 +9,7 @@ namespace netcat
     public class NetCatSettings
     {
         public bool ListenMode;
+        public bool KeepAccept;
         public bool UdpMode;
         public bool PrintToConsole;
         public RedirectSource Source = RedirectSource.StandardInput;
@@ -37,6 +38,11 @@ namespace netcat
                 if (arg.IndexOf("l") != -1)
                 {
                     settings.ListenMode = true;
+                }
+
+                if (arg.IndexOf("k") != -1)
+                {
+                    settings.KeepAccept = true;
                 }
             }
 

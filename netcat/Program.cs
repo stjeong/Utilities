@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace netcat
 {
@@ -12,10 +13,11 @@ namespace netcat
         {
             if (args.Length < 2)
             {
-                Console.WriteLine("netcat [-u -C] [-l] [address] [port]");
+                Console.WriteLine("netcat [-u -C] [-l -k] [address] [port]");
                 Console.WriteLine(" -u UDP mode");
                 Console.WriteLine(" -C print to console");
-                Console.WriteLine(" -l listen mode");
+                Console.WriteLine(" -l Listen mode, for inbound connects");
+                Console.WriteLine(" -k Keep inbound sockets open for multiple connects");
                 return;
             }
 
@@ -118,34 +120,60 @@ namespace netcat
             TcpListener listener = new TcpListener(System.Net.IPAddress.Parse(bindingAddress), port);
             listener.Start();
 
-            using (TcpClient client = listener.AcceptTcpClient())
+            do
+            {
+                TcpClient client = listener.AcceptTcpClient();
+
+                if (settings.KeepAccept)
+                {
+                    Task.Run(() =>
+                    {
+                        ReadClientStream(client);
+                    });
+                }
+                else
+                {
+                    ReadClientStream(client);
+                }
+
+            } while (settings.KeepAccept == true);
+
+            listener.Stop();
+        }
+
+        private static void ReadClientStream(TcpClient client)
+        {
+            using (client)
             using (NetworkStream ns = client.GetStream())
             using (StreamReader sr = new StreamReader(ns))
             {
                 while (true)
                 {
-                    string text = null;
-
                     try
                     {
-                        text = sr.ReadLine();
+                        int data = sr.Read();
+                        if (data < 0)
+                        {
+                            break;
+                        }
+
+                        char ch = (char)data;
+                        if (char.IsLetterOrDigit(ch) == true)
+                        {
+                            Console.Write(ch);
+                        }
+                        else
+                        {
+                            Console.Write('.');
+                        }
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e.Message);
                         break;
                     }
-
-                    if (text == null)
-                    {
-                        break;
-                    }
-
-                    Console.WriteLine(text);
                 }
             }
-
-            listener.Stop();
         }
 
         private static StreamReader OpenRedirectInput(NetCatSettings settings)
